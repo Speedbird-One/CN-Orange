@@ -1,0 +1,38 @@
+============================================================
+PROJECT: Static Routing using SDN Controller
+FLOW TABLE DUMP - TEST SCENARIOS
+============================================================
+
+SCENARIO 1: ALLOWED PATH (H1 to H2)
+------------------------------------------------------------
+Command: sh ovs-ofctl dump-flows s1
+Output:
+ cookie=0x0, duration=5.790s, table=0, n_packets=3, n_bytes=238, priority=10,dl_dst=00:00:00:00:00:02 actions=output:"s1-eth2"
+ cookie=0x0, duration=5.766s, table=0, n_packets=2781, n_bytes=116914, priority=10,dl_dst=00:00:00:00:00:01 actions=output:"s1-eth1"
+ cookie=0x0, duration=49.065s, table=0, n_packets=2833, n_bytes=122838, priority=0 actions=CONTROLLER:65535
+
+
+SCENARIO 2: BLOCKED PATH (H1 to H3)
+------------------------------------------------------------
+Command: sh ovs-ofctl dump-flows s1
+Output:
+ cookie=0x0, duration=22.481s, table=0, n_packets=3, n_bytes=238, priority=10,dl_dst=00:00:00:00:00:02 actions=output:"s1-eth2"
+ cookie=0x0, duration=22.471s, table=0, n_packets=31578, n_bytes=1326388, priority=10,dl_dst=00:00:00:00:00:01 actions=output:"s1-eth1"
+ cookie=0x0, duration=15.277s, table=0, n_packets=2, n_bytes=196, priority=20,dl_dst=00:00:00:00:00:03 actions=drop
+ cookie=0x0, duration=39.194s, table=0, n_packets=22900, n_bytes=965820, priority=0 actions=CONTROLLER:65535
+
+
+SCENARIO 3: REGRESSION TEST (Pre-Reinstall)
+------------------------------------------------------------
+Description: Flow table before 'del-flows' and re-triggering ping.
+Output:
+ cookie=0x0, duration=27.752s, table=0, n_packets=5, n_bytes=434, priority=10,dl_dst=00:00:00:00:00:02 actions=output:"s1-eth2"
+ cookie=0x0, duration=27.736s, table=0, n_packets=19516, n_bytes=819896, priority=10,dl_dst=00:00:00:00:00:01 actions=output:"s1-eth1"
+ cookie=0x0, duration=42.023s, table=0, n_packets=19564, n_bytes=825560, priority=0 actions=CONTROLLER:65535
+
+
+SCENARIO 3: REGRESSION TEST (Post-Reinstall)
+------------------------------------------------------------
+Description: Flow table after 'del-flows' and re-triggering ping.
+Output:
+ (NULL)

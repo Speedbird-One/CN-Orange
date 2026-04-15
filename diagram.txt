@@ -1,0 +1,8 @@
+        [ RYU SDN CONTROLLER ] (Management Plane)
+          /        |        \
+         /         |         \  (OpenFlow v1.3 Control Links)
+        /          |          \
+    [ S1 ]-------[ S2 ]------- [ S3 ] (Data Plane Triangle)
+      |            |            |
+      |            |            |
+    [ H1 ]       [ H2 ]       [ H3 ] (End Hosts)
