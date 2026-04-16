@@ -96,6 +96,12 @@ sudo mn --custom src/topo.py --topo statictopo --controller remote
 
 ![Task3_3](docs/screenshots/task3_3.png)
 
+### Network Performance (iperf)
+
+Validation of the throughput between H1 and H2 over the static path to ensure the controller-installed rules handle high-volume data.
+
+![iperf](docs/screenshots/iperf.png)
+
 ## 4. Expected Output Documentation
 
 ### Flow Table Validation
